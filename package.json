@@ -1,0 +1,31 @@
+{
+  "name": "vue-binpacker-plugin",
+  "version": "1.0.0",
+  "description": "a vue.js binpacker plugin",
+  "main": "./dist/build.js",
+  "scripts": {
+    "babel": "babel --presets env src/index.js -o dist/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t-k-f/vue-binpacker-plugin.git"
+  },
+  "keywords": [
+    "packery",
+    "binpacker",
+    "vue",
+    "plugin"
+  ],
+  "author": "Jan Thoma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/t-k-f/vue-binpacker-plugin/issues"
+  },
+  "homepage": "https://github.com/t-k-f/vue-binpacker-plugin#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.4.3"
+  }
+}
