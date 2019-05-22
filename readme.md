@@ -21,7 +21,6 @@ Vue.use(VueBinpackerPlugin)
 ```
 <VueBinpacker>
 
-
     <div data-packer-item='true'></div>
     <div data-packer-item='true'></div>
 
