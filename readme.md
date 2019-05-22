@@ -30,7 +30,7 @@ Vue.use(VueBinpackerPlugin)
 
 ### Roadmap
 
-- Testing for Browser Compatibility
+- ~~Testing for Browser Compatibility~~ (Working on all recents browsers, including IE11)
 - Extend documentation
 - Support for horizontal layouts
 - Eventhandling for manually triggering layouts

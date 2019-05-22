@@ -83,7 +83,10 @@ export default {
 
                     window.requestAnimationFrame(() =>
                     {
-                        this.observerPause = false
+                        window.requestAnimationFrame(() =>
+                        {
+                            this.observerPause = false
+                        })
                     })
                 }
             }
