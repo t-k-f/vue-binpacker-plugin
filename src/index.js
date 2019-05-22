@@ -71,13 +71,21 @@ export default {
                     const container = { width: width, height: Infinity }
                     const result = packer(container, rects)
 
+                    var containerHeight = 0
+
                     for (let i = 0; i < nodes.length; i++)
                     {
                         nodes[i].style.position = 'absolute'
                         nodes[i].style.left = 0
                         nodes[i].style.top = 0
                         nodes[i].style.transform = 'translate(' + result[i].x + 'px, ' + result[i].y + 'px)'
+
+                        var offsetHeight = result[i].y + result[i].height
+
+                        containerHeight = (offsetHeight > containerHeight) ? offsetHeight : containerHeight
                     }
+
+                    this.$el.style.height = containerHeight + 'px'
 
                     window.requestAnimationFrame(() =>
                     {

@@ -1,6 +1,6 @@
 {
   "name": "vue-binpacker-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "a vue.js binpacker plugin",
   "main": "./dist/build.js",
   "scripts": {
