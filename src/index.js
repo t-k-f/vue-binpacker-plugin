@@ -71,6 +71,8 @@ export default {
                     const container = { width: width, height: Infinity }
                     const result = packer(container, rects)
 
+                    console.log(result)
+
                     for (let i = 0; i < nodes.length; i++)
                     {
                         nodes[i].style.position = 'absolute'
@@ -79,7 +81,7 @@ export default {
                         nodes[i].style.transform = 'translate(' + result[i].x + 'px, ' + result[i].y + 'px)'
                     }
 
-                    this.$nextTick(() =>
+                    window.requestAnimationFrame(() =>
                     {
                         this.observerPause = false
                     })
