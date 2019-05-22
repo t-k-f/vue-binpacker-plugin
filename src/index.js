@@ -71,8 +71,6 @@ export default {
                     const container = { width: width, height: Infinity }
                     const result = packer(container, rects)
 
-                    console.log(result)
-
                     for (let i = 0; i < nodes.length; i++)
                     {
                         nodes[i].style.position = 'absolute'
