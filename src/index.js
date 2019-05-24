@@ -13,6 +13,7 @@ export default {
                     this.$slots.default
                 )
             },
+            props: ['gap', 'rtl'],
             data ()
             {
                 return {
@@ -54,9 +55,22 @@ export default {
                 {
                     this.observerPause = true
 
+                    const gap  = this.$el.querySelectorAll('[data-packer-gap="true"]')
                     const width = this.$el.getBoundingClientRect().width
                     const nodes = this.$el.querySelectorAll('[data-packer-item="true"]')
                     const rects = []
+
+                    var gapSize = 0
+
+                    if (gap.length)
+                    {
+                        gapSize = gap[0].getBoundingClientRect().width
+                    }
+
+                    else if (this.gap)
+                    {
+                        gapSize = this.gap
+                    }
 
                     for (let i = 0; i < nodes.length; i++)
                     {
@@ -69,7 +83,7 @@ export default {
                     }
 
                     const container = { width: width, height: Infinity }
-                    const result = packer(container, rects)
+                    const result = packer(container, rects, {rtl: this.rtl, gap: gapSize})
 
                     var containerHeight = 0
 
