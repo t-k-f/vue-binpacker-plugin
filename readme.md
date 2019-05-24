@@ -24,7 +24,38 @@ Vue.use(VueBinpackerPlugin)
     <div data-packer-item='true'></div>
     <div data-packer-item='true'></div>
 
+</VueBinpacker>
+```
+
+### Layout Direction
+
+It's possible to layout from rtl
+
+```
+<VueBinpacker :rtl='true'>
+...
+```
+
+### Gap
+
+There are two ways to set the gap between images. Setting an explicit width as prop.
+
+```
+<VueBinpacker :gap='10'>
+...
+```
+
+Defining an Element as reference.
+
+```
 <VueBinpacker>
+
+    <span data-packer-gap='true'>
+
+    <div data-packer-item='true'></div>
+    <div data-packer-item='true'></div>
+
+</VueBinpacker>
 ```
 
 ### Roadmap
