@@ -58,9 +58,33 @@ Defining an Element as reference.
 </VueBinpacker>
 ```
 
+### Manually init layout
+
+If desired it's possible to trigger the layout at a specific moment. To do so set the initLayout prop to false and trigger the layout by switching the toggleLayout prop.
+
+```
+<VueBinpacker :initLayout='false' :toggleLayout='false'>
+...
+```
+
+### Manual relayout
+
+By switching the toggleLayout prop a manual relayout can achieved.
+
+```
+<VueBinpacker :initLayout='false' :toggleLayout='false'>
+...
+```
+
+# Events
+
+```
+@layoutDone => triggered when layout done returns the result of the packing algorithm
+```
+
 ### Roadmap
 
 - ~~Testing for Browser Compatibility~~ (Working on all recents browsers, including IE11)
-- Extend documentation
+- ~~Extend documentation
 - Support for horizontal layouts
-- Eventhandling for manually triggering layouts
+- ~~Eventhandling for manually triggering layouts
