@@ -56,9 +56,15 @@ export default {
             },
             mounted ()
             {
-                this.setObserver()
-                this.setPacker()
                 this.$el.style.position = 'relative'
+                this.setObserver()
+
+                if (!this.initLayout)
+                {
+                    return
+                }
+
+                this.setPacker()
             },
             methods:
             {
@@ -69,7 +75,7 @@ export default {
                 },
                 setObserverMutations (mutations)
                 {
-                    if (this.observerPause)
+                    if (this.observerPause || !this.initLayout)
                     {
                         return
                     }
@@ -131,8 +137,16 @@ export default {
                         window.requestAnimationFrame(() =>
                         {
                             this.observerPause = false
+                            this.$emit('layoutDone', result)
                         })
                     })
+                }
+            },
+            watch:
+            {
+                toggleLayout ()
+                {
+                    this.setPacker()
                 }
             }
         })
