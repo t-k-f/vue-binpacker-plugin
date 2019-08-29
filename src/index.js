@@ -13,7 +13,32 @@ export default {
                     this.$slots.default
                 )
             },
-            props: ['gap', 'rtl'],
+            props: {
+                gap:
+                {
+                    type: Number,
+                    required: false,
+                    default: 0
+                },
+                rtl:
+                {
+                    type: Boolean,
+                    required: false,
+                    default: false
+                },
+                initLayout:
+                {
+                    type: Boolean,
+                    required: false,
+                    default: true
+                },
+                toggleLayout:
+                {
+                    type: Boolean,
+                    required: false,
+                    default: false
+                }
+            },
             data ()
             {
                 return {
