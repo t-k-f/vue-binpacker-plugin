@@ -85,6 +85,6 @@ By switching the toggleLayout prop a manual relayout can achieved.
 ### Roadmap
 
 - ~~Testing for Browser Compatibility~~ (Working on all recents browsers, including IE11)
-- ~~Extend documentation
+- ~~Extend documentation~~
 - Support for horizontal layouts
-- ~~Eventhandling for manually triggering layouts
+- ~~Eventhandling for manually triggering layouts~~
