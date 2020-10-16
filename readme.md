@@ -1,6 +1,6 @@
 # Vue.js Packery Plugin
 
-A Bin Packer Plugin. Similiar to the well known Packery based on [Nikolay Karev's work](https://github.com/karevn/binpack-2d).
+A Bin Packer Plugin for Vue.js 3.x. Similiar to the well known Packery based on [Nikolay Karev's work](https://github.com/karevn/binpack-2d).
 
 ### Installing
 
@@ -11,9 +11,9 @@ npm install --save vue-binpacker-plugin
 then
 
 ```
-import VueBinpackerPlugin from 'vue-binpacker'
+import VueBinpackerPlugin from 'vue-binpacker-plugin'
 
-Vue.use(VueBinpackerPlugin)
+createApp(App).use(VueBinpackerPlugin)
 ```
 
 ### Usage
@@ -88,3 +88,7 @@ By switching the toggleLayout prop a manual relayout can achieved.
 - ~~Extend documentation~~
 - Support for horizontal layouts
 - ~~Eventhandling for manually triggering layouts~~
+
+### Vue.js 2.x
+
+Please install the package version @1.1.0

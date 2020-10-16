@@ -1,10 +1,11 @@
 {
   "name": "vue-binpacker-plugin",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "a vue.js binpacker plugin",
   "main": "./dist/build.js",
   "scripts": {
-    "babel": "babel --presets env src/index.js -o dist/build.js"
+    "babel": "babel --presets env src/index.js -o dist/build.js",
+    "babel:lib": "babel --presets env lib/packer.js -o lib/packer.min.js"
   },
   "repository": {
     "type": "git",

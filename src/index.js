@@ -1,18 +1,18 @@
-import Vue from 'vue'
-import packer from '../lib/packer.js'
+import packer from '../lib/packer.min.js'
+import { h } from 'vue'
 
 export default {
-
-    install (Vue, options)
+    install: (app, options) =>
     {
-        Vue.component('vueBinpacker', {
-            render: function (createElement)
-            {
-                return createElement(
+        app.component('vueBinpacker', {
+            render() {
+                return h(
                     'div',
-                    this.$slots.default
+                    {},
+                    this.$slots.default()
                 )
             },
+            emits: ['layout-done'],
             props: {
                 gap:
                 {
@@ -50,7 +50,7 @@ export default {
             {
                 window.addEventListener('resize', this.setPacker)
             },
-            beforeDestroy ()
+            beforeUnmount ()
             {
                 window.removeEventListener('resize', this.setPacker)
             },
@@ -137,7 +137,7 @@ export default {
                         window.requestAnimationFrame(() =>
                         {
                             this.observerPause = false
-                            this.$emit('layoutDone', result)
+                            this.$emit('layout-done', result)
                         })
                     })
                 }
