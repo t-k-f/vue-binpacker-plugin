@@ -46,16 +46,14 @@ export default {
                     observerPause: false
                 }
             },
-            created ()
-            {
-                window.addEventListener('resize', this.setPacker)
-            },
             beforeUnmount ()
             {
                 window.removeEventListener('resize', this.setPacker)
             },
             mounted ()
             {
+                window.addEventListener('resize', this.setPacker)
+
                 this.$el.style.position = 'relative'
                 this.setObserver()
 
