@@ -99,7 +99,7 @@ export default {
                     if (gapNode.length)
                     {
                         gap.x = gapNode[0].getBoundingClientRect().width,
-                        gap.y = getBoundingClientRect().height
+                        gap.y = gapNode[0].getBoundingClientRect().height
                     }
 
                     else
