@@ -41,7 +41,7 @@ It's possible to layout from rtl
 There are two ways to set the gap between images. Setting an explicit width as prop.
 
 ```
-<VueBinpacker :gap='10'>
+<VueBinpacker :gap='{ x: 10 y: 20 }'>
 ...
 ```
 
