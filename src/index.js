@@ -1,11 +1,12 @@
-import packer from '../lib/packer.min.js'
+import packer from './packer.js'
 import { h } from 'vue'
 
 export default {
     install: (app, options) =>
     {
         app.component('vueBinpacker', {
-            render() {
+            render ()
+            {
                 return h(
                     'div',
                     {},
@@ -16,9 +17,14 @@ export default {
             props: {
                 gap:
                 {
-                    type: Number,
-                    required: false,
-                    default: 0
+                    type: Object,
+                    default: () =>
+                    {
+                        return {
+                            x: 0,
+                            y: 0
+                        }
+                    }
                 },
                 rtl:
                 {
@@ -84,37 +90,29 @@ export default {
                 {
                     this.observerPause = true
 
-                    const gap  = this.$el.querySelectorAll('[data-packer-gap="true"]')
+                    const gapNode = this.$el.querySelectorAll('[data-packer-gap="true"]')
                     const width = this.$el.getBoundingClientRect().width
                     const nodes = this.$el.querySelectorAll('[data-packer-item="true"]')
                     const rects = []
-
-                    var gapSize = 0
-
-                    if (gap.length)
-                    {
-                        gapSize = gap[0].getBoundingClientRect().width
-                    }
-
-                    else if (this.gap)
-                    {
-                        gapSize = this.gap
+                    const gap = {
+                        x: 0 || gapNode[0]?.getBoundingClientRect().width || this.gap.x,
+                        y: 0 || gapNode[0]?.getBoundingClientRect().height || this.gap.y
                     }
 
                     for (let i = 0; i < nodes.length; i++)
                     {
-                        let rect = nodes[i].getBoundingClientRect()
+                        const rect = nodes[i].getBoundingClientRect()
 
                         rects.push({
-                            width: Math.floor(rect.width),
-                            height: Math.floor(rect.height)
+                            width: rect.width,
+                            height: rect.height
                         })
                     }
 
                     const container = { width: width, height: Infinity }
-                    const result = packer(container, rects, {rtl: this.rtl, gap: gapSize})
+                    const result = packer(container, rects, { rtl: this.rtl, gap: gap })
 
-                    var containerHeight = 0
+                    let containerHeight = 0
 
                     for (let i = 0; i < nodes.length; i++)
                     {
@@ -123,7 +121,7 @@ export default {
                         nodes[i].style.top = 0
                         nodes[i].style.transform = 'translate(' + result[i].x + 'px, ' + result[i].y + 'px)'
 
-                        var offsetHeight = result[i].y + result[i].height
+                        const offsetHeight = result[i].y + result[i].height
 
                         containerHeight = (offsetHeight > containerHeight) ? offsetHeight : containerHeight
                     }
