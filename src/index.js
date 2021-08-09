@@ -90,13 +90,22 @@ export default {
                 {
                     this.observerPause = true
 
+                    const gap = {}
                     const gapNode = this.$el.querySelectorAll('[data-packer-gap="true"]')
                     const width = this.$el.getBoundingClientRect().width
                     const nodes = this.$el.querySelectorAll('[data-packer-item="true"]')
                     const rects = []
-                    const gap = {
-                        x: 0 || gapNode[0]?.getBoundingClientRect().width || this.gap.x,
-                        y: 0 || gapNode[0]?.getBoundingClientRect().height || this.gap.y
+
+                    if (gapNode.length)
+                    {
+                        gap.x = gapNode[0].getBoundingClientRect().width,
+                        gap.y = getBoundingClientRect().height
+                    }
+
+                    else
+                    {
+                        gap.x = this.gap.x
+                        gap.y = this.gap.y
                     }
 
                     for (let i = 0; i < nodes.length; i++)
