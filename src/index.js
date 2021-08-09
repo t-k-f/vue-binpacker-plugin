@@ -1,4 +1,4 @@
-import packer from './packer.js'
+import packer from '../lib/packer.min.js'
 import { h } from 'vue'
 
 export default {
