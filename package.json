@@ -1,12 +1,8 @@
 {
   "name": "vue-binpacker-plugin",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "a vue.js binpacker plugin",
-  "main": "./dist/build.js",
-  "scripts": {
-    "babel": "babel --presets env src/index.js -o dist/build.js",
-    "babel:lib": "babel --presets env lib/packer.js -o lib/packer.min.js"
-  },
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/t-k-f/vue-binpacker-plugin.git"
@@ -22,11 +18,5 @@
   "bugs": {
     "url": "https://github.com/t-k-f/vue-binpacker-plugin/issues"
   },
-  "homepage": "https://github.com/t-k-f/vue-binpacker-plugin#readme",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-minify": "^0.5.2"
-  }
+  "homepage": "https://github.com/t-k-f/vue-binpacker-plugin#readme"
 }
