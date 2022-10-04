@@ -1,6 +1,6 @@
 {
   "name": "vue-binpacker-plugin",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "a vue.js binpacker plugin",
   "main": "./dist/build.js",
   "scripts": {
@@ -27,6 +27,6 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-minify": "^0.4.3"
+    "babel-preset-minify": "^0.5.2"
   }
 }

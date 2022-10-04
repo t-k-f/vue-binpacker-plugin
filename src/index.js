@@ -1,20 +1,12 @@
-import packer from '../lib/packer.min.js'
-import { h } from 'vue'
+import packer from './lib/packer.js'
+import { h, onBeforeUnmount, onMounted, ref } from 'vue'
 
 export default {
     install: (app, options) =>
     {
-        app.component('vueBinpacker', {
-            render ()
+        app.component('VueBinpacker', {
+            props:
             {
-                return h(
-                    'div',
-                    {},
-                    this.$slots.default()
-                )
-            },
-            emits: ['layout-done'],
-            props: {
                 gap:
                 {
                     type: Object,
@@ -45,67 +37,38 @@ export default {
                     default: false
                 }
             },
-            data ()
+            setup (props, { slots })
             {
-                return {
-                    observer: null,
-                    observerPause: false
-                }
-            },
-            beforeUnmount ()
-            {
-                window.removeEventListener('resize', this.setPacker)
-            },
-            mounted ()
-            {
-                window.addEventListener('resize', this.setPacker)
+                const element = ref(null)
+                const observerPause = ref(false)
 
-                this.$el.style.position = 'relative'
-                this.setObserver()
+                let observerResize = null
+                let observerMutation = null
 
-                if (!this.initLayout)
+                const setPacker = async () =>
                 {
-                    return
-                }
+                    if (observerPause.value || !props.initLayout) return
 
-                this.setPacker()
-            },
-            methods:
-            {
-                setObserver ()
-                {
-                    this.observer = new MutationObserver(this.setObserverMutations)
-                    this.observer.observe(this.$el, { childList: true, attributes: true, subtree: true })
-                },
-                setObserverMutations (mutations)
-                {
-                    if (this.observerPause || !this.initLayout)
-                    {
-                        return
-                    }
+                    observerPause.value = true
 
-                    this.setPacker()
-                },
-                setPacker ()
-                {
-                    this.observerPause = true
+                    console.log('runs')
 
                     const gap = {}
-                    const gapNode = this.$el.querySelectorAll('[data-packer-gap="true"]')
-                    const width = this.$el.getBoundingClientRect().width
-                    const nodes = this.$el.querySelectorAll('[data-packer-item="true"]')
+                    const gapNode = element.value.querySelectorAll('[data-packer-gap="true"]')
+                    const width = element.value.getBoundingClientRect().width
+                    const nodes = element.value.querySelectorAll('[data-packer-item="true"]')
                     const rects = []
 
                     if (gapNode.length)
                     {
-                        gap.x = gapNode[0].getBoundingClientRect().width,
+                        gap.x = gapNode[0].getBoundingClientRect().width
                         gap.y = gapNode[0].getBoundingClientRect().height
                     }
 
                     else
                     {
-                        gap.x = this.gap.x
-                        gap.y = this.gap.y
+                        gap.x = props.gap.x
+                        gap.y = props.gap.y
                     }
 
                     for (let i = 0; i < nodes.length; i++)
@@ -118,8 +81,8 @@ export default {
                         })
                     }
 
-                    const container = { width: width, height: Infinity }
-                    const result = packer(container, rects, { rtl: this.rtl, gap: gap })
+                    const container = { width, height: Infinity }
+                    const result = packer(container, rects, { rtl: props.rtl, gap })
 
                     let containerHeight = 0
 
@@ -128,31 +91,45 @@ export default {
                         nodes[i].style.position = 'absolute'
                         nodes[i].style.left = 0
                         nodes[i].style.top = 0
-                        nodes[i].style.transform = 'translate(' + result[i].x + 'px, ' + result[i].y + 'px)'
+                        nodes[i].style.transform = `translate(${result[i].x}px, ${result[i].y}px)`
 
                         const offsetHeight = result[i].y + result[i].height
 
                         containerHeight = (offsetHeight > containerHeight) ? offsetHeight : containerHeight
                     }
 
-                    this.$el.style.height = containerHeight + 'px'
+                    element.value.style.height = `${containerHeight}px`
 
-                    window.requestAnimationFrame(() =>
-                    {
-                        window.requestAnimationFrame(() =>
-                        {
-                            this.observerPause = false
-                            this.$emit('layout-done', result)
-                        })
-                    })
+                    await new Promise(requestAnimationFrame)
+                    await new Promise(requestAnimationFrame)
+
+                    observerPause.value = false
                 }
-            },
-            watch:
-            {
-                toggleLayout ()
+
+                const setObservers = () =>
                 {
-                    this.setPacker()
+                    observerResize = new ResizeObserver(setPacker)
+                    observerMutation = new MutationObserver(setPacker)
+
+                    observerResize.observe(element.value)
+                    observerMutation.observe(element.value, { childList: true, attributes: true, subtree: true })
                 }
+
+                onMounted(() =>
+                {
+                    element.value.style.position = 'relative'
+
+                    setObservers()
+                    setPacker()
+                })
+
+                onBeforeUnmount(() =>
+                {
+                    observerResize.disconnect()
+                    observerMutation.disconnect()
+                })
+
+                return () => h('div', { ref: element }, slots.default())
             }
         })
     }
