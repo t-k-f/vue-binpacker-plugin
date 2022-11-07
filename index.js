@@ -51,8 +51,6 @@ export default {
 
                     observerPause.value = true
 
-                    console.log('runs')
-
                     const gap = {}
                     const gapNode = element.value.querySelectorAll('[data-packer-gap="true"]')
                     const width = element.value.getBoundingClientRect().width

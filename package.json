@@ -1,6 +1,6 @@
 {
   "name": "vue-binpacker-plugin",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "type": "module",
   "description": "a vue.js binpacker plugin",
   "main": "index.js",
